@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "CommonJS",
+
+    "baseUrl": "./src",
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"],
+      "@errors/*": ["./shared/errors/*"],
+      "@middlewares/*": ["./shared/infra/http/middlewares/*"]
+    },
+
+    "resolveJsonModule": true,
+
+    "esModuleInterop": true,
+
+    "forceConsistentCasingInFileNames": true,
+
+    "skipLibCheck": true
+  }
+}

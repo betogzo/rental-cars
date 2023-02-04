@@ -1,0 +1,159 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Rental Cars API Docs",
+    "description": "Complete documentation for Rental Cars' API",
+    "version": "v1",
+    "contact": { "email": "albertogaleazzo@msn.com" }
+  },
+
+  "paths": {
+    "/categories": {
+      "post": {
+        "tags": ["Category"],
+        "summary": "Create a category",
+        "description": "Route for car categories creation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" }
+                },
+                "example": {
+                  "name": "Sedan",
+                  "description": "Family cars"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Category already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Category"],
+        "summary": "List Categories",
+        "description": "Route for listing all categories",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "tags": ["Category"],
+        "summary": "Upload CSV files to automate categories creation",
+        "description": "Upload new categories using a CSV file",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/specifications": {
+      "post": {
+        "tags": ["Specification"],
+        "summary": "Create a specification",
+        "description": "Route for car specification creation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" }
+                },
+                "example": {
+                  "name": "Automatic",
+                  "description": "Automatic gearbox"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Specification already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Specification"],
+        "summary": "List Specifications",
+        "description": "Route for listing all specifications",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

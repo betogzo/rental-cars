@@ -1,0 +1,36 @@
+version: '2.15.1'
+
+services:
+  app:
+    build: .
+    container_name: rentalcars
+    environment:
+      - DB_HOST=database
+    restart: always
+    ports:
+      - 3333:3333
+    volumes:
+      - .:/usr/app
+    links:
+      - database
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    networks:
+      - default
+    container_name: database
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=rentalcarsdb
+    volumes:
+      - pgdata:/data/postgres
+
+volumes:
+  pgdata:
+    driver: local
