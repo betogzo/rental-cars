@@ -1,6 +1,7 @@
+import ICarsRepository from '@modules/cars/repositories/ICarsRepository';
 import Rental from '@modules/rentals/infra/typeorm/entities/Rental';
 import IRentalsRepository from '@modules/rentals/repositories/IRentalsRepository';
-import IDateProvider from '@shared/container/providers/IDateProvider';
+import IDateProvider from '@shared/container/providers/dateProvider/IDateProvider';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
@@ -15,6 +16,8 @@ export default class CreateRentalUseCase {
   constructor(
     @inject('RentalsRepository')
     private rentalsRepository: IRentalsRepository,
+    @inject('CarsRepository')
+    private carsRepository: ICarsRepository,
     @inject('DateProvider')
     private dateProvider?: IDateProvider
   ) {}
@@ -47,6 +50,8 @@ export default class CreateRentalUseCase {
 
     if (validateRentalTime < 24)
       throw new AppError('Rental must last at least 24 hours.');
+
+    this.carsRepository.updateAvailability(car_id, false);
 
     const rental = await this.rentalsRepository.create({
       user_id,

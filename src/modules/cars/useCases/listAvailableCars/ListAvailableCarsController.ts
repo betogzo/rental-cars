@@ -8,12 +8,14 @@ export default class ListAvailableCarsController {
 
     const listCarsUseCase = container.resolve(ListAvailableCarsUseCase);
 
-    const cars = await listCarsUseCase.execute({
+    const availableCars = await listCarsUseCase.execute({
       brand: brand as string,
       name: name as string,
       category_id: category_id as string,
     });
 
-    return response.status(200).json({ cars });
+    if (availableCars.length === 0) return response.status(204).send();
+
+    return response.status(200).json({ availableCars });
   }
 }

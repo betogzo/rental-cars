@@ -19,4 +19,23 @@ export default class DayJsDateProvider implements IDateProvider {
 
     return dayjs(end_date_utc).diff(start_date_utc, 'hours');
   }
+
+  diffInDays(start_date: Date, end_date: Date): number {
+    const start_date_utc = this.convertToUTC(start_date);
+    const end_date_utc = this.convertToUTC(end_date);
+
+    return dayjs(end_date_utc).diff(start_date_utc, 'days');
+  }
+
+  addDays(numOfDays: number): Date {
+    return dayjs().add(numOfDays, 'days').toDate();
+  }
+
+  addHours(numOfHours: number): Date {
+    return dayjs().add(numOfHours, 'hours').toDate();
+  }
+
+  isBefore(start_date: Date, end_date: Date): boolean {
+    return dayjs(start_date).isBefore(end_date);
+  }
 }

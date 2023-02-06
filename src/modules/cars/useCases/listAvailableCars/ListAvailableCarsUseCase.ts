@@ -16,11 +16,12 @@ export default class ListAvailableCarsUseCase {
   ) {}
 
   async execute({ name, brand, category_id }: IRequest): Promise<Car[]> {
-    const cars = await this.carsRepository.listAvailable(
+    const availableCars = await this.carsRepository.listAvailable(
       name,
       brand,
       category_id
     );
-    return cars;
+
+    return availableCars;
   }
 }

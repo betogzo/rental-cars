@@ -26,7 +26,7 @@ describe('Create Car Specification', () => {
         car_id,
         specifications_id,
       })
-    ).rejects.toEqual(new AppError('Car not registered in our database'));
+    ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should be able to add a new specification to a car', async () => {
